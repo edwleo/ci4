@@ -22,3 +22,8 @@ $routes->get('/coder', 'Carrera::showIngenieria');
 
 $routes->get('/creativo', 'Carrera::showDesign');
 $routes->get('/marketing', 'Carrera::showDesign');
+
+//Nuevas rutas para navegar desde DASHBOARD
+$routes->get('/clientes','Cliente::index');
+$routes->get('/proveedores','Proveedor::index');
+$routes->get('/productos','Producto::index');
