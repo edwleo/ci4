@@ -12,7 +12,7 @@ class Cliente extends BaseController
       'header' => view('Partials/header'),
       'footer' => view('Partials/footer'),
     ];
-    return view("Modulos/clientes", $data);
+    return view("Modulos/clientes/index", $data);
   }
 
 }

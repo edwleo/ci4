@@ -12,7 +12,7 @@ class Producto extends BaseController
       'header' => view('Partials/header'),
       'footer' => view('Partials/footer'),
     ];
-    return view("Modulos/productos", $data);
+    return view("Modulos/productos/index", $data);
   }
 
 }

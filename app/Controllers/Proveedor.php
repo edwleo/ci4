@@ -12,7 +12,7 @@ class Proveedor extends BaseController
       'header' => view('Partials/header'),
       'footer' => view('Partials/footer'),
     ];
-    return view("Modulos/proveedores", $data);
+    return view("Modulos/proveedores/index", $data);
   }
 
 }
