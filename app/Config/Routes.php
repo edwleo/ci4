@@ -24,8 +24,11 @@ $routes->get('/creativo', 'Carrera::showDesign');
 $routes->get('/marketing', 'Carrera::showDesign');
 
 //Nuevas rutas para navegar desde DASHBOARD
-$routes->get('/clientes','Cliente::index');
-$routes->get('/clientes/registrar', 'Cliente::create');
+$routes->get('/clientes','Cliente::index'); //Muestra la tabla con datos
+$routes->get('/clientes/registrar', 'Cliente::create'); //Muestra solo el formulario
+$routes->post('/clientes/guardar','Cliente::registrarCliente'); //Envía los datos del form a la tabla DB
+$routes->get('/clientes/eliminar/(:num)', 'Cliente::eliminar/$1');
+$routes->get('/clientes/buscar/(:num)', 'Cliente::buscar/$1'); //Antes de actualizar, tenemos que buscar
 
 $routes->get('/proveedores','Proveedor::index');
 $routes->get('/productos','Producto::index');

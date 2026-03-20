@@ -15,7 +15,7 @@
           <th>Comandos</th>
         </tr>
       </thead>
-      <tbody>
+      <tbody id="content-table">
       <?php foreach ($clientes as $cliente): ?>
         <tr>
           <td><?= $cliente['id'] ?></td>
@@ -24,8 +24,22 @@
           <td><?= $cliente['dni'] ?></td>
           <td><?= $cliente['telefono'] ?></td>
           <td>
-            <a href="#" class="btn btn-sm btn-danger">Eliminar</a>
-            <a href="#" class="btn btn-sm btn-info">Editar</a>
+
+            <!-- Eliminación directa -->
+            <a href="<?= base_url('clientes/eliminar/') ?><?= $cliente['id'] ?>" class="btn btn-sm btn-dark">Eliminar</a>
+
+            <!-- Eliminación previa confirmación -->
+            <a 
+              href="#" 
+              class="btn btn-sm btn-danger btn-eliminar" 
+              data-idcliente="<?= $cliente['id'] ?>" 
+              data-nombres="<?= $cliente['nombres'] ?>"
+              >
+              Eliminar
+            </a>
+
+            <a href="<?= base_url('clientes/buscar/') ?><?= $cliente['id'] ?>" class="btn btn-sm btn-info">Editar</a>
+
           </td>
         </tr>
       <?php endforeach; ?>
@@ -34,4 +48,29 @@
 
   </div>
 </div>
+
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+  //Referencia
+  const dataTable = document.querySelector("#content-table")
+
+  //Eventos (en todo el cuerpo de la tabla)
+  dataTable.addEventListener("click", function(event) {
+    
+    //Detectar los botones Eliminación
+    if (event.target.classList.contains('btn-eliminar')){
+        const idcliente = event.target.getAttribute('data-idcliente')
+        const nombres = event.target.getAttribute('data-nombres')
+
+        if (!confirm("¿Desea eliminar el registro de " + nombres + "?")) return;
+
+        //Procederé a eliminar...
+        window.location.href = "<?= base_url('clientes/eliminar/') ?>" + idcliente
+    }
+
+  })
+
+})
+</script>
+
 <?= $footer ?>
