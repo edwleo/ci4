@@ -25,5 +25,7 @@ $routes->get('/marketing', 'Carrera::showDesign');
 
 //Nuevas rutas para navegar desde DASHBOARD
 $routes->get('/clientes','Cliente::index');
+$routes->get('/clientes/registrar', 'Cliente::create');
+
 $routes->get('/proveedores','Proveedor::index');
 $routes->get('/productos','Producto::index');
