@@ -34,4 +34,7 @@ $routes->post('/clientes/actualizar', 'Cliente::actualizar'); //Después de busc
 $routes->get('/proveedores','Proveedor::index');
 $routes->get('/productos','Producto::index');
 
+
+$routes->get('/marcas/obtener','Marca::getMarcas');
+
 $routes->get('/vehiculos','Vehiculo::index');

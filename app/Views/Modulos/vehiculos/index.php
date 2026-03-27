@@ -56,13 +56,12 @@
           <div class="form-group">
             <label for="marcas">Marca</label>
             <select name="marcas" id="marcas" class="form-control" required>
-              <option value="">Marca</option>
-              <option value="A">AAA</option>
+              <option value="">Seleccione</option>
             </select>
           </div>
           <div class="form-group">
             <label for="modelo">Modelo</label>
-            <input type="text" id="modelo" name="modelo" class="form-control" placeholder="Modelo" required>
+            <input type="text" id="modelo" name="modelo" class="form-control" required>
           </div>
           <div class="form-group">
             <label for="">Año</label>
@@ -92,11 +91,32 @@
 
     const modal = document.getElementById("modal-registro");
     const formulario = document.getElementById("form-vehiculos");
+    const marcas = document.getElementById("marcas");
     
     $('#modal-registro').on('hidden.bs.modal', function (event) {
       formulario.reset();
     })
     
+    async function obtenerMarcas(){
+      try{
+        const response = await fetch('<?= base_url('/marcas/obtener') ?>')
+        const data = await response.json();
+
+        if (data){
+          data.forEach(element => {
+            const option = document.createElement("option");
+            option.value = element.id;
+            option.textContent = element.marca;
+            marcas.appendChild(option);
+          });
+        }
+
+      }catch(error){
+        console.error("Error al obtener marcas", error);
+      }
+    }
+
+    obtenerMarcas();
 
   });
 </script>
