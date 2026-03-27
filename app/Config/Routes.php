@@ -38,3 +38,6 @@ $routes->get('/productos','Producto::index');
 $routes->get('/marcas/obtener','Marca::getMarcas');
 
 $routes->get('/vehiculos','Vehiculo::index');
+$routes->get('/vehiculos/obtener','Vehiculo::getVehiculos');
+$routes->post('/vehiculos/registrar','Vehiculo::registrarVehiculo');
+$routes->delete('/vehiculos/eliminar/(:num)','Vehiculo::eliminarVehiculo/$1');

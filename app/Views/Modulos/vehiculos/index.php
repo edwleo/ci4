@@ -18,21 +18,8 @@
           <th>Acciones</th>
         </tr>
       </thead>
-      <tbody>
-        <?php foreach ($vehiculos as $vehiculo): ?>
-          <tr>
-            <td><?= $vehiculo['id'] ?></td>
-            <td><?= $vehiculo['marca'] ?></td>
-            <td><?= $vehiculo['modelo'] ?></td>
-            <td><?= $vehiculo['anio'] ?></td>
-            <td><?= $vehiculo['color'] ?></td>
-            <td><?= $vehiculo['precio'] ?></td>
-            <td>
-              <a href="#" class="btn btn-sm btn-primary">Editar</a>
-              <a href="#" class="btn btn-sm btn-danger">Eliminar</a>
-            </td>
-          </tr>
-        <?php endforeach; ?>
+      <tbody id="content-vehiculos">
+        
       </tbody>
     </table>
 
@@ -92,17 +79,47 @@
     const modal = document.getElementById("modal-registro");
     const formulario = document.getElementById("form-vehiculos");
     const marcas = document.getElementById("marcas");
-    
+    const tabla = document.getElementById("content-vehiculos");
+
     $('#modal-registro').on('hidden.bs.modal', function (event) {
       formulario.reset();
     })
-    
-    async function obtenerMarcas(){
+
+    async function obtenerVehiculos(){
       try{
-        const response = await fetch('<?= base_url('/marcas/obtener') ?>')
+        const response = await fetch(`<?= base_url('vehiculos/obtener') ?>`);
         const data = await response.json();
 
         if (data){
+          tabla.innerHTML = "";
+          data.forEach(element => {
+            tabla.innerHTML += `
+            <tr>
+              <td>${element.id}</td>
+              <td>${element.marca}</td>
+              <td>${element.modelo}</td>
+              <td>${element.anio}</td>
+              <td>${element.color}</td>
+              <td>${element.precio}</td>
+              <td>
+                <a href="#" class="btn btn-sm btn-info btn-editar" data-idvehiculo="${element.id}">Editar</a>
+                <a href="#" class="btn btn-sm btn-danger btn-eliminar" data-idvehiculo="${element.id}">Eliminar</a>
+              </td>
+            </tr>
+            `;
+          });
+        }
+      }catch(error){
+        console.error("Error al obtener vehículos", error);
+      }
+    }
+
+    async function obtenerMarcas() {
+      try {
+        const response = await fetch('<?= base_url('/marcas/obtener') ?>')
+        const data = await response.json();
+
+        if (data) {
           data.forEach(element => {
             const option = document.createElement("option");
             option.value = element.id;
@@ -111,12 +128,83 @@
           });
         }
 
-      }catch(error){
+      } catch (error) {
         console.error("Error al obtener marcas", error);
       }
     }
 
+    async function registrarVehiculo() {
+      try {
+        const vehiculo = {
+          idmarca: marcas.value,
+          modelo: document.getElementById("modelo").value,
+          anio: document.getElementById("anio").value,
+          color: document.getElementById("color").value,
+          precio: document.getElementById("precio").value
+        }
+
+        const response = await fetch('<?= base_url('/vehiculos/registrar') ?>', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify(vehiculo)
+        });
+
+        const data = await response.json();
+        if (data.status === "success") {
+          alert(data.message);
+          //location.reload();
+          obtenerVehiculos();
+          $("#modal-registro").modal("hide");
+        } else {
+          alert(data.message);
+        }
+      } catch (error) {
+        console.error("Error al registrar vehículo", error);
+      }
+    }
+
+    async function eliminarVehiculo(idvehiculo) {
+      try {
+        const response = await fetch(`<?= base_url('/vehiculos/eliminar') ?>/${idvehiculo}`, {
+          method: 'DELETE'
+        });
+
+        const data = await response.json();
+        if (data.status === "success") {
+          alert(data.message);
+          //location.reload();
+          obtenerVehiculos();
+        } else {
+          alert(data.message);
+        }
+      } catch (error) {
+        console.error("Error al eliminar vehículo", error);
+      }
+    }
+
+    formulario.addEventListener("submit", function (event) {
+      event.preventDefault();
+
+      if (!confirm("¿Está seguro de registrar el vehpiculo?")) { return; }
+      registrarVehiculo();
+
+    });
+
+    tabla.addEventListener("click", function (event){
+      if (event.target.classList.contains("btn-eliminar")) {
+        const idvehiculo = event.target.getAttribute("data-idvehiculo");
+        if (confirm("¿Está seguro de eliminar el vehículo?")) {
+          // Aquí iría la lógica para eliminar el vehículo usando el idvehiculo
+          //console.log("Eliminar vehículo con ID:", idvehiculo);
+          eliminarVehiculo(idvehiculo);
+        }
+      }
+    });
+
     obtenerMarcas();
+    obtenerVehiculos();
 
   });
 </script>
