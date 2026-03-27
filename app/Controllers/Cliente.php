@@ -20,6 +20,7 @@ class Cliente extends BaseController
       'header'    => view('Partials/header'),
       'clientes'  => $cliente->findAll(),
       'footer'    => view('Partials/footer'),
+      'libraries' => view('Partials/libraries')
     ];
 
     return view("Modulos/clientes/index", $data);
@@ -32,7 +33,8 @@ class Cliente extends BaseController
   public function create(): string{
     $data = [
       'header'    => view('Partials/header'),
-      'footer'    => view('Partials/footer')
+      'footer'    => view('Partials/footer'),
+      'libraries' => view('Partials/libraries')
     ];
 
     return view('Modulos/clientes/registrar', $data);
@@ -48,6 +50,7 @@ class Cliente extends BaseController
     $data = [
       'header'    => view('Partials/header'),
       'footer'    => view('Partials/footer'),
+      'libraries' => view('Partials/libraries'),
       'registro'  => $registro
     ];
 

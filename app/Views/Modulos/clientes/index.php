@@ -49,6 +49,8 @@
   </div>
 </div>
 
+<?= $libraries ?>
+
 <script>
 document.addEventListener("DOMContentLoaded", () => {
   //Referencia

@@ -11,6 +11,7 @@ class Proveedor extends BaseController
     $data = [
       'header' => view('Partials/header'),
       'footer' => view('Partials/footer'),
+      'libraries' => view('Partials/libraries')
     ];
     return view("Modulos/proveedores/index", $data);
   }

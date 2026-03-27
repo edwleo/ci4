@@ -5,4 +5,6 @@
     
   </div>
 </div>
+
+<?= $libraries ?>
 <?= $footer ?>

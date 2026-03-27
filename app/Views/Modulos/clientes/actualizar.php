@@ -34,6 +34,8 @@
   </div>
 </div>
 
+<?= $libraries ?>
+
 <script>
   document.addEventListener('DOMContentLoaded', function(){
     const form = document.getElementById('form-clientes');
