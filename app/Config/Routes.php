@@ -40,3 +40,6 @@ $routes->get('/vehiculos/listar', 'Vehiculo::getVehiculos');
 $routes->post('/vehiculos/registrar','Vehiculo::registrarVehiculo');
 
 $routes->get('/marcas/listar', 'Marca::getMarcas');
+
+//Reportes
+$routes->get('/reportes/vehiculostodos', 'ReporteController::vehiculosTodosPDF');
