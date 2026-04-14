@@ -38,6 +38,7 @@ $routes->get('/vehiculos', 'Vehiculo::index');
 //BD > Modelo > Controlador > Ruta > JS > HTML
 $routes->get('/vehiculos/listar', 'Vehiculo::getVehiculos');
 $routes->post('/vehiculos/registrar','Vehiculo::registrarVehiculo');
+$routes->get('/vehiculos/reporte', 'Vehiculo::mostrarUIReportes');
 
 $routes->get('/marcas/listar', 'Marca::getMarcas');
 

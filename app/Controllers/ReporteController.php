@@ -20,6 +20,7 @@ class ReporteController extends BaseController
     ];
 
     $estilos = view('Reports/estilos'); //Estilos CSS
+    //$camioneta = base_url('/images/camioneta.jpg'); //PUBLIC
     $html = view('Reports/prueba', ['personas' => $listaPersonas, 'estilos' => $estilos]);
 
     try{

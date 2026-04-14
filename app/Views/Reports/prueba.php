@@ -10,6 +10,10 @@
   </page_footer>
 
   <!-- Contenido -->
+  <!-- Imagen de la empresa -->
+  <!-- <img src="<?= base_url('images/camioneta.jpg') ?>" alt="Camioneta"> -->
+
+  <!-- Tabla con datos -->
   <table class="table">
     <thead>
       <tr>
