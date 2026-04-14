@@ -55,7 +55,6 @@ class CrearTablaVehiculos extends Migration
 
         //Restricciones
         $this->forge->addPrimaryKey("id");
-        $this->forge->addKey('');
         //campoForáneo, tabla, clavePrimaria, PermisoActualizar, PermisoEliminar
         $this->forge->addForeignKey("idmarca","marcas","id","RESTRICT","RESTRICT");
 
