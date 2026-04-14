@@ -42,4 +42,5 @@ $routes->post('/vehiculos/registrar','Vehiculo::registrarVehiculo');
 $routes->get('/marcas/listar', 'Marca::getMarcas');
 
 //Reportes
-$routes->get('/reportes/vehiculostodos', 'ReporteController::vehiculosTodosPDF');
+$routes->get('/reportes/vehiculos', 'ReporteController::generarReporteVehiculos');
+$routes->get('/reportes/prueba', 'ReporteController::generarReportePrueba');
